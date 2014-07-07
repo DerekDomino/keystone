@@ -1452,7 +1452,7 @@ Keystone.prototype.applyUpdates = function(callback) {
  */
 
 Keystone.prototype.render = function(req, res, view, ext) {
-	
+	console.log('view', view);
 	var keystone = this,
 		template = templateCache[view];
 		

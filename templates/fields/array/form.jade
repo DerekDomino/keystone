@@ -1,0 +1,17 @@
+// Initially copy pasted from item.jade
+.field(class='type-' + field.type, data-field-type=field.type, data-field-path=field.path, data-field-collapse=field.collapse ? 'true' : false, data-field-depends-on=field.dependsOn, data-field-noedit=field.noedit ? 'true' : 'false')
+    .field-label= field.label
+    - values = item.get(field.path)
+    each value in values
+        | <div class="form-indent"><div class="form-indent">
+        each el in field.options.model.uiElements
+            if el.type == 'field'
+                if (el.field.type != 'text' || el.field != nameField) && !el.field.hidden
+                    != el.field.render('form', value, fieldLocals)
+            else if el.type == 'heading'
+                h3.form-heading(data-field-depends-on=el.options.dependsOn)= el.heading
+            else if el.type == 'indent'
+                | <div class="form-indent">
+            else if el.type == 'outdent'
+                | </div>
+        | </div></div>
