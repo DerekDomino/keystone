@@ -1,6 +1,7 @@
 // Initially copy pasted from item.jade
 .field(class='type-' + field.type, data-field-type=field.type, data-field-path=field.path, data-field-collapse=field.collapse ? 'true' : false, data-field-depends-on=field.dependsOn, data-field-noedit=field.noedit ? 'true' : 'false')
     .field-label= field.label
+    .clear
     - values = item.get(field.path)
     each value in values
         | <div class="form-indent"><div class="form-indent">
@@ -14,4 +15,5 @@
                 | <div class="form-indent">
             else if el.type == 'outdent'
                 | </div>
+        hr
         | </div></div>

@@ -22,7 +22,7 @@ exports = module.exports = function(req, res) {
 
 	switch (req.params.action) {
 
-		case 'autocomplete':
+        case 'autocomplete':
 
 			var limit = req.query.limit || 10,
 				page = req.query.page || 1,
@@ -59,14 +59,22 @@ exports = module.exports = function(req, res) {
 
 				});
 			};
-
+            console.log('req.query',req.query);
 			if (req.query.context === 'relationship') {
-
+                console.log('context', req.query.context);
 				var srcList = keystone.list(req.query.list);
 
 				if (!srcList) return sendError('invalid list provided');
 
-				var field = srcList.fields[req.query.field];
+                var field;
+                if (!req.query.parentListPath) {
+                    field = srcList.fields[req.query.field];
+                } else {
+                    // TODO: handle nested sublists
+                    field = srcList.fields[req.query.parentListPath].options.model.fields[req.query.field];
+                }
+
+                console.log(srcList.fields);
 
 				if (!field || field.type !== 'relationship') return sendError('invalid field provided');
 

@@ -80,7 +80,8 @@ jQuery(function($) {
 		var args = {
 			context: 'relationship',
 			list: Keystone.list.path,
-			field: el.attr('name')
+			field: el.attr('name'),
+            parentListPath: el.data('refParentListPath') || ''
 		};
 		
 		if (Keystone.item) {
