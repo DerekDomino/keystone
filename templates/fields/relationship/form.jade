@@ -16,13 +16,14 @@ else
 					.help-block (not set)
 			else
 				input(type='hidden',
-					name=field.path,
+					name=field.itemPath(item),
 					id='field_' + field.path,
 					value=field.many ? item.get(field.path).join(',') : item.get(field.path),
 					data-ref-many=field.many ? 'true' : null,
 					data-ref-filters=field.filters,
 					data-ref-path=refList.path,
-                    data-ref-parent-list-path=field.list.parentListPath,
+                    data-ref-field-path=field.path,
+                    data-ref-parent-list-path=field.list.parentFieldPath,
 					data-ref-singular=refList.singular,
 					data-ref-plural=refList.plural).ui-select2-ref
 				if !field.many && item.get(field.path)

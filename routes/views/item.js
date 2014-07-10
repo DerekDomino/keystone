@@ -2,6 +2,8 @@ var keystone = require('../../'),
 	_ = require('underscore'),
 	async = require('async');
 
+var util = require('util');
+
 exports = module.exports = function(req, res) {
 	
 	req.list.model.findById(req.params.item).exec(function(err, item) {
@@ -157,14 +159,15 @@ exports = module.exports = function(req, res) {
 			});
 			
 		};
-		
+
 		if (req.method === 'POST' && req.body.action === 'updateItem' && !req.list.get('noedit')) {
 			
 			if (!keystone.security.csrf.validate(req)) {
 				req.flash('error', 'There was a problem with your request, please try again.');
 				return renderView();
 			}
-			
+			console.log('req.body');
+            console.log(util.inspect(req.body['recipe.recipeIngredients'], {depth: 12}));
 			item.getUpdateHandler(req).process(req.body, { flashErrors: true, logErrors: true }, function(err) {
 				if (err) {
 					return renderView();

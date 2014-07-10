@@ -67,11 +67,11 @@ exports = module.exports = function(req, res) {
 				if (!srcList) return sendError('invalid list provided');
 
                 var field;
-                if (!req.query.parentListPath) {
+                if (!req.query.parentFieldPath) {
                     field = srcList.fields[req.query.field];
                 } else {
                     // TODO: handle nested sublists
-                    field = srcList.fields[req.query.parentListPath].options.model.fields[req.query.field];
+                    field = srcList.fields[req.query.parentFieldPath].options.model.fields[req.query.field];
                 }
 
                 console.log(srcList.fields);
